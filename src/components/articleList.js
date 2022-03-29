@@ -13,6 +13,7 @@ export default function ArticleList() {
           }
           id
           slug
+          excerpt
         }
       }
     }
@@ -24,7 +25,8 @@ export default function ArticleList() {
                 <Link to={"articles/"+ node.slug}>
                     <h3>{node.frontmatter.title}</h3>
                 </Link>
-                <p>Posted: {node.frontmatter.date}</p>
+                <p>{node.frontmatter.date}</p>
+                <small>{node.excerpt}</small>
             </article>
         ))
     )

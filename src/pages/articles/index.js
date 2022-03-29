@@ -7,7 +7,7 @@ const Articles = () => {
 
   const data = useStaticQuery(graphql`
   query {
-    allMdx(sort: {fields: frontmatter___title, order: DESC}) {
+    allMdx(sort: {fields: frontmatter___title, order: ASC}) {
       nodes {
         frontmatter {
           date(formatString: "MMMM D, YYYY")
@@ -27,7 +27,7 @@ const Articles = () => {
     
     {data.allMdx.nodes.map(node => (
             <article key={node.id}>
-                <Link to={"articles/"+ node.slug}>
+                <Link to={node.slug}>
                     <h3>{node.frontmatter.title}</h3>
                 </Link>
                 <p>Posted: {node.frontmatter.date}</p>
