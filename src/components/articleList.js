@@ -3,7 +3,7 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 
 export default function ArticleList() {
 
-    const data = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     query {
       allMdx(sort: {fields: frontmatter___date, order: DESC}) {
         nodes {
@@ -19,15 +19,17 @@ export default function ArticleList() {
     }
     `)
 
-    return (
-        data.allMdx.nodes.map(node => (
-            <article key={node.id}>
-                <Link to={"articles/"+ node.slug}>
-                    <h3>{node.frontmatter.title}</h3>
-                </Link>
-                <p>{node.frontmatter.date}</p>
-                <small>{node.excerpt}</small>
-            </article>
-        ))
-    )
+  return (
+    data.allMdx.nodes.map(node => (
+      <article key={node.id}>
+        <h3>
+          <Link to={"articles/" + node.slug}>
+            {node.frontmatter.title}
+          </Link>
+        </h3>
+        <p>{node.frontmatter.date}</p>
+        <small>{node.excerpt}</small>
+      </article>
+    ))
+  )
 }

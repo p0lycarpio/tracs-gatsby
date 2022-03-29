@@ -1,2 +1,13 @@
 @forward './scss/typo';
 @forward './scss/colors';
+
+$a-tags: 'a, a:active, a:hover, a:visited';
+$a-tags-hover: 'a:active, a:hover';
+
+#{$a-tags} {
+    color: darkslateblue;
+}
+
+#{$a-tags-hover} {
+    color: lightcoral;
+  }
