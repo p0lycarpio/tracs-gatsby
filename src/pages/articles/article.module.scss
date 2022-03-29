@@ -1,0 +1,22 @@
+@use "../../scss/typo";
+
+$font-size-base : 16px;
+$font-size-upper : 20px;
+$font-size-dec : 2px;
+
+@mixin md-text {
+  font: 20px typo.$caladea;
+  line-height: 32px;
+}
+
+.article {
+  @include md-text;
+
+  @each $heading in typo.$headings {
+    #{$heading} {
+      font-size: $font-size-upper;
+      font-size: calc($font-size-upper / $font-size-base) + em;
+    }
+    $font-size-upper : $font-size-upper - $font-size-dec;
+  }
+}

@@ -1,11 +1,30 @@
+@use '../../scss/colors';
+
 .nav-links {
-    display: flex;
-    list-style: none;
-    padding-left: 0;
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.nav-link-item {
+  padding-right: 2rem;
+}
+
+.nav-link-text {
+  color: colors.$grey;
+  text-decoration: none;
+  font-weight: 500;
+
+  span {
+    font-family: 'Material Icons';
+    font-size: 24px;
+    color: colors.$lightgrey;
+    margin-right: 6px;
+    vertical-align: bottom;
+    line-height:24px;
   }
-  .nav-link-item {
-    padding-right: 2rem;
-  }
-  .nav-link-text {
-    color: black;
-  }
+}
+
+nav {
+  margin: 3em 0;
+}

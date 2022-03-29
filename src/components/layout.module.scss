@@ -1,9 +1,19 @@
+@use "../scss/colors";
+
 .container {
-    margin: auto;
-    max-width: 1080px;
-    font-family: sans-serif;
-  }
+  margin: auto;
+  max-width: 1080px;
+}
   
-  .heading {
-    color: rebeccapurple;
-  }
+.heading {
+  color: colors.$grey;
+  text-transform: lowercase;
+  font-weight: bolder;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: colors.$lavender;
+}
+
+main {
+  margin: 1em 0;
+}
