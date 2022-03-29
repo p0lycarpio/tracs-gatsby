@@ -1,9 +1,6 @@
 import * as React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import {
-  container,
-  heading,
-} from './layout.module.scss'
+import { container, heading } from './layout.module.scss'
 import Nav from './nav/nav.js'
 
 const Layout = ({ pageTitle, children }) => {
@@ -20,7 +17,7 @@ const Layout = ({ pageTitle, children }) => {
   return (
     <div className={container}>
       <title>{pageTitle}</title>
-      <h1 className={heading}>{data.site.siteMetadata.title}</h1>
+      <span className={heading}>{data.site.siteMetadata.title}</span>
       <Nav></Nav>
       <main>
         {children}

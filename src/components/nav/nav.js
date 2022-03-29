@@ -10,19 +10,18 @@ import {
 const menuLinks = [
   {
     name: 'Home',
-    link: '/'
+    link: '/',
+    icon: 'home'
   },
   {
     name: 'Thèmes',
-    link: '/page-2'
+    link: '/themes',
+    icon: 'category'
   },
   {
-    name: 'Espaces',
-    link: '/page-3'
-  },
-  {
-    name: 'Périodes',
-    link: '/page-4'
+    name: 'Articles',
+    link: '/articles',
+    icon: 'article'
   },
 ]
 
@@ -32,8 +31,8 @@ const Nav = () => {
       <ul className={navLinks}>
         {menuLinks.map(link =>
           <li className={navLinkItem}>
-
             <Link to={link.link} className={navLinkText}>
+            <span>{link.icon}</span>
               {link.name}
             </Link>
           </li>
