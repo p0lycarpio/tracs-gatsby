@@ -10,6 +10,8 @@ $font-size-dec : 2px;
 }
 
 .article {
+  margin-top: 2em;
+
   @include md-text;
 
   @each $heading in typo.$headings {
