@@ -1,0 +1,14 @@
+[
+    {
+        "name": "John Doe",
+        "slug": "john-doe",
+        "biography": "",
+        "image": "images/jd.jpg"
+    },
+    {
+        "name": "Doe John",
+        "slug": "doe-john",
+        "biography": "",
+        "image": "images/dj.jpg"
+    }
+]
