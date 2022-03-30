@@ -1,4 +1,4 @@
-exports.createPages = ({ actions: { createPage } }) => {
+/* exports.createPages = ({ actions: { createPage } }) => {
     const themes = require('./content/themes/themes.json')
 
     themes.forEach(theme => {
@@ -12,5 +12,5 @@ exports.createPages = ({ actions: { createPage } }) => {
                 image: theme.image
             }
         })
-    })
-}
+    }) 
+}*/
