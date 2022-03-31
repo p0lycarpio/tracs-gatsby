@@ -1,6 +1,6 @@
 import * as React from "react"
-import Layout from "../../components/layout"
-import ThemeItem from "../../components/themeItem"
+import Layout from "../components/layout"
+import ThemeItem from "../components/themeItem"
 import { useStaticQuery, graphql } from "gatsby"
 
 const Themes = () => {
