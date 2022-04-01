@@ -1,7 +1,8 @@
 import * as React from "react"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
+import { LocalizedLink } from "gatsby-theme-i18n"
 
-export default function ArticleList() {
+export default function ArticleList({ lang }) {
   const data = useStaticQuery(graphql`
     query {
       allMdx(
@@ -13,6 +14,10 @@ export default function ArticleList() {
           frontmatter {
             date(formatString: "MMMM D, YYYY")
             title
+            slug
+          }
+          fields {
+            locale
           }
           id
           slug
@@ -22,10 +27,14 @@ export default function ArticleList() {
     }
   `)
 
-  return data.allMdx.nodes.map(node => (
+  const filtered = data.allMdx.nodes.filter(node => {
+    return node.fields.locale.includes(lang)
+  })
+
+  return filtered.map(node => (
     <article key={node.id}>
       <h3>
-        <Link to={"articles/" + node.slug}>{node.frontmatter.title}</Link>
+        <LocalizedLink to={node.frontmatter.slug}>{node.frontmatter.title}</LocalizedLink>
       </h3>
       <p>{node.frontmatter.date}</p>
       <small>{node.excerpt}</small>
