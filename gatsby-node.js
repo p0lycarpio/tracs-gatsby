@@ -16,7 +16,15 @@
 }*/
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
+
+  createRedirect({
+    fromPath: `/`,
+    toPath: `/fr`,
+    exactPath: true,
+    redirectInBrowser: true,
+    isPermanent: false,
+  })
 
   const blogTemplate = require.resolve(`./src/templates/blog-template.js`)
 
