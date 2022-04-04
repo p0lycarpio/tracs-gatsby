@@ -1,8 +1,11 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { LocalizedLink } from "gatsby-theme-i18n"
+import { LocalizedLink, useLocalization } from "gatsby-theme-i18n"
 
-export default function ArticleList({ lang }) {
+export default function ArticleList() {
+  const { locale } = useLocalization()
+  console.log(locale)
+
   const data = useStaticQuery(graphql`
     query {
       allMdx(
@@ -28,7 +31,7 @@ export default function ArticleList({ lang }) {
   `)
 
   const filtered = data.allMdx.nodes.filter(node => {
-    return node.fields.locale.includes(lang)
+    return node.fields.locale.includes(locale)
   })
 
   return filtered.map(node => (

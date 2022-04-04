@@ -1,8 +1,12 @@
 import * as React from "react"
 import Layout from "../components/layout"
 import { useStaticQuery, graphql, Link } from "gatsby"
+import { useLocalization } from "gatsby-theme-i18n"
+import { LocalizedLink } from "gatsby-theme-i18n"
 
 const Articles = () => {
+  const { locale } = useLocalization()
+
   const data = useStaticQuery(graphql`
     query {
       allMdx(sort: { fields: frontmatter___title, order: ASC }, filter: { fileAbsolutePath: { regex: "/articles/" } }) {
@@ -10,6 +14,10 @@ const Articles = () => {
           frontmatter {
             date(formatString: "MMMM D, YYYY")
             title
+            slug
+          }
+          fields {
+            locale
           }
           id
           slug
@@ -18,16 +26,20 @@ const Articles = () => {
     }
   `)
 
+  const filtered = data.allMdx.nodes.filter(node => {
+    return node.fields.locale.includes(locale)
+  })
+
   return (
     <main>
-      <Layout pageTitle="Articles">
+      <Layout pageTitle="Articles" page={"/articles"}>
         <h1>Articles de A à Z</h1>
 
-        {data.allMdx.nodes.map(node => (
+        {filtered.map(node => (
           <article key={node.id}>
-            <Link to={node.slug}>
+            <LocalizedLink to={node.frontmatter.slug}>
               <h3>{node.frontmatter.title}</h3>
-            </Link>
+            </LocalizedLink>
             <p>Posted: {node.frontmatter.date}</p>
           </article>
         ))}

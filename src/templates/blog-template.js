@@ -6,8 +6,9 @@ import Layout from "../components/layout"
 
 const BlogTemplate = ({ data, pageContext }) => {
   const { t } = useTranslation("index")
+
   return (
-    <Layout>
+    <Layout article={data.mdx.slug} pageTitle={data.mdx.frontmatter.title}>
       <span>DEBUG i18n</span>
       <h1>_ {t("context")}</h1>
       <pre>{JSON.stringify(pageContext, null, 2)}</pre>
@@ -29,6 +30,7 @@ export const query = graphql`
         title
       }
       body
+      slug
     }
   }
 `
