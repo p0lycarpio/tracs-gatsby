@@ -1,20 +1,3 @@
-/* exports.createPages = ({ actions: { createPage } }) => {
-    const themes = require('./content/themes/themes.json')
-
-    themes.forEach(theme => {
-
-        createPage({
-            path: `/themes/${theme.slug}/`,
-            component: require.resolve("./src/pages/themes/theme.js"),
-            context: {
-                title: theme.title,
-                description: theme.description,
-                image: theme.image
-            }
-        })
-    })
-}*/
-
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage, createRedirect } = actions
 
@@ -26,12 +9,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     isPermanent: false,
   })
 
-  const blogTemplate = require.resolve(`./src/templates/blog-template.js`)
+  const articleTemplate = require.resolve(`./src/templates/article-template.js`)
+  const themeTemplate = require.resolve(`./src/templates/theme-template.js`)
 
   const result = await graphql(`
     {
-      blog: allFile(filter: { sourceInstanceName: { eq: "articles" } }) {
+      allMdx: allFile {
         nodes {
+          sourceInstanceName
           childMdx {
             frontmatter {
               type
@@ -48,15 +33,25 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
 
-  const blogPosts = result.data.blog.nodes
+  const dataResult = result.data.allMdx.nodes
 
-  blogPosts.forEach(({ childMdx: node }) => {
-    createPage({
-      path: node.frontmatter.slug,
-      component: blogTemplate,
-      context: {
-        slug: node.frontmatter.slug,
-      },
-    })
+  dataResult.forEach(node => {
+    if (node.sourceInstanceName === "articles") {
+      createPage({
+        path: node.childMdx.frontmatter.slug,
+        component: articleTemplate,
+        context: {
+          slug: node.childMdx.frontmatter.slug,
+        },
+      })
+    } else if (node.sourceInstanceName === "themes" && node.childMdx != null) {
+      createPage({
+        path: node.childMdx.frontmatter.slug,
+        component: themeTemplate,
+        context: {
+          slug: node.childMdx.frontmatter.slug,
+        },
+      })
+    }
   })
 }
