@@ -4,7 +4,6 @@ import { LocalizedLink, useLocalization } from "gatsby-theme-i18n"
 
 export default function Lang({ slug, page }) {
   const { config } = useLocalization()
-  console.log(config)
 
   const data = useStaticQuery(
     graphql`
@@ -35,11 +34,8 @@ export default function Lang({ slug, page }) {
   if (slug) {
     const filtered = data.allFile.edges.filter(node => {
       let slugged = slug.split("/")
-      console.log(slugged)
       return node.node.relativeDirectory.includes(slugged[0])
     })
-
-    console.log(filtered)
 
     return filtered.map(node => (
       <span>
@@ -50,12 +46,11 @@ export default function Lang({ slug, page }) {
       </span>
     ))
   } else if (page) {
-    console.log(config)
     return (
       <div>
         {config.map(element => {
           return (
-            <span>
+            <span key={element.hrefLang}>
               <LocalizedLink to={page} language={element.code}>
                 {element.code.toUpperCase()}
               </LocalizedLink>

@@ -28,7 +28,7 @@ const Themes = () => {
 
   return (
     <main>
-      <Layout pageTitle="Thèmes">
+      <Layout pageTitle="Thèmes" page={"/themes"}>
         <h1>{t("themes")}</h1>
         {data.allMdx.nodes.map((data, index) => (
           <div key={`content_item_${index}`}>

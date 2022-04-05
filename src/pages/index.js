@@ -1,7 +1,6 @@
 import * as React from "react"
 import Layout from "../components/layout"
 import ArticleList from "../components/articleList"
-import { useLocalization } from "gatsby-theme-i18n"
 import { useTranslation } from "react-i18next"
 
 const IndexPage = () => {

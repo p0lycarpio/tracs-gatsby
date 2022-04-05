@@ -1,6 +1,6 @@
 import * as React from "react"
 import Layout from "../components/layout"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import { useLocalization } from "gatsby-theme-i18n"
 import { LocalizedLink } from "gatsby-theme-i18n"
 
