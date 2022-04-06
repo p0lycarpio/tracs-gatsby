@@ -3,9 +3,11 @@ import Layout from "../components/layout"
 import { useStaticQuery, graphql } from "gatsby"
 import { useLocalization } from "gatsby-theme-i18n"
 import { LocalizedLink } from "gatsby-theme-i18n"
+import { useTranslation } from "react-i18next"
 
 const Articles = () => {
   const { locale } = useLocalization()
+  const { t } = useTranslation("index")
 
   const data = useStaticQuery(graphql`
     query {
@@ -15,12 +17,14 @@ const Articles = () => {
             date(formatString: "MMMM D, YYYY")
             title
             slug
+            author
           }
           fields {
             locale
           }
           id
           slug
+          excerpt
         }
       }
     }
@@ -33,14 +37,15 @@ const Articles = () => {
   return (
     <main>
       <Layout pageTitle="Articles" page={"/articles"}>
-        <h1>Articles de A à Z</h1>
+        <h1>{t("articles_title")}</h1>
 
         {filtered.map(node => (
           <article key={node.id}>
-            <LocalizedLink to={node.frontmatter.slug}>
-              <h3>{node.frontmatter.title}</h3>
-            </LocalizedLink>
-            <p>Posted: {node.frontmatter.date}</p>
+            <h3>
+              <LocalizedLink to={node.frontmatter.slug}>{node.frontmatter.title}</LocalizedLink>
+            </h3>
+            <p>{node.frontmatter.author + ", " + node.frontmatter.date}</p>
+            <small>{node.excerpt}</small>
           </article>
         ))}
       </Layout>

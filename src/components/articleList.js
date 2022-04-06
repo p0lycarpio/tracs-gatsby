@@ -8,16 +8,13 @@ export default function ArticleList() {
 
   const data = useStaticQuery(graphql`
     query {
-      allMdx(
-        filter: { fileAbsolutePath: { regex: "/articles/" } }
-        sort: { fields: frontmatter___date, order: DESC }
-        limit: 5
-      ) {
+      allMdx(filter: { fileAbsolutePath: { regex: "/articles/" } }, sort: { fields: frontmatter___date, order: DESC }) {
         nodes {
           frontmatter {
             date(formatString: "MMMM D, YYYY")
             title
             slug
+            author
           }
           fields {
             locale
@@ -34,12 +31,12 @@ export default function ArticleList() {
     return node.fields.locale.includes(locale)
   })
 
-  return filtered.map(node => (
+  return filtered.slice(0, 5).map(node => (
     <article key={node.id}>
       <h3>
         <LocalizedLink to={node.frontmatter.slug}>{node.frontmatter.title}</LocalizedLink>
       </h3>
-      <p>{node.frontmatter.date}</p>
+      <p>{node.frontmatter.author + ", " + node.frontmatter.date}</p>
       <small>{node.excerpt}</small>
     </article>
   ))

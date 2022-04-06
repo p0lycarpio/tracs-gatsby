@@ -4,5 +4,6 @@
   "themes": "Topics",
   "article404": "Article not found",
   "article404msg": "The requested article in this locale is not yet translated",
-  "dispo": "It is still available in: "
+  "dispo": "It is still available in: ",
+  "articles_title": "Articles from A to Z"
 }

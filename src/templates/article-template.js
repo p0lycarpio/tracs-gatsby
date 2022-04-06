@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/layout"
 import { article } from "./article.module.scss"
 import { graphql } from "gatsby"
 import { useTranslation } from "react-i18next"
-import { LocalizedLink } from "gatsby-theme-i18n"
 
 const ArticleTemplate = ({ data }) => {
   const { t } = useTranslation("index")
   const [rendu, setRendu] = useState("")
 
-  const callArticle = (lang, e) => {
-    e.preventDefault()
+  const callArticle = (lang, event) => {
+    event.preventDefault()
     const translated = data.allMdx.nodes.filter(n => {
       return n.fields.locale.includes(lang)
     })
@@ -37,15 +36,15 @@ const ArticleTemplate = ({ data }) => {
         <main>
           <Layout>
             <h1>{t("article404")}</h1>
-            <div className={article}>
+            <div>
               <p>{t("article404msg")}</p>
               <p>
                 {t("dispo")}
                 {data.allMdx.nodes.map(article => (
                   <span key={article.id}>
-                    <a href="" onClick={e => callArticle(article.fields.locale, e)}>
+                    <button onClick={event => callArticle(article.fields.locale, event)}>
                       {article.fields.locale.toUpperCase()}
-                    </a>
+                    </button>
                     {` `}
                   </span>
                 ))}
@@ -85,13 +84,9 @@ export const query = graphql`
           locale
         }
         frontmatter {
-          slug
-          lang
           title
         }
-        id
         body
-        slug
       }
     }
   }
