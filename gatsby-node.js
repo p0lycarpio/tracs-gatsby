@@ -1,16 +1,57 @@
-/* exports.createPages = ({ actions: { createPage } }) => {
-    const themes = require('./content/themes/themes.json')
+exports.createPages = async ({ actions, graphql, reporter }) => {
+  const { createPage, createRedirect } = actions
 
-    themes.forEach(theme => {
+  createRedirect({
+    fromPath: `/`,
+    toPath: `/fr`,
+    exactPath: true,
+    redirectInBrowser: true,
+    isPermanent: false,
+  })
 
-        createPage({
-            path: `/themes/${theme.slug}/`,
-            component: require.resolve("./src/pages/themes/theme.js"),
-            context: {
-                title: theme.title,
-                description: theme.description,
-                image: theme.image
+  const articleTemplate = require.resolve(`./src/templates/article-template.js`)
+  const themeTemplate = require.resolve(`./src/templates/theme-template.js`)
+
+  const result = await graphql(`
+    {
+      allMdx: allFile {
+        nodes {
+          sourceInstanceName
+          childMdx {
+            frontmatter {
+              type
+              slug
             }
-        })
-    }) 
-}*/
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) {
+    reporter.panicOnBuild(result.errors)
+    return
+  }
+
+  const dataResult = result.data.allMdx.nodes
+
+  dataResult.forEach(node => {
+    if (node.sourceInstanceName === "articles") {
+      createPage({
+        path: node.childMdx.frontmatter.slug,
+        component: articleTemplate,
+        context: {
+          slug: node.childMdx.frontmatter.slug,
+        },
+      })
+    } else if (node.sourceInstanceName === "themes" && node.childMdx != null) {
+      createPage({
+        path: node.childMdx.frontmatter.slug,
+        component: themeTemplate,
+        context: {
+          slug: node.childMdx.frontmatter.slug,
+        },
+      })
+    }
+  })
+}

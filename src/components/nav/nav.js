@@ -1,40 +1,43 @@
 import * as React from "react"
-import { Link } from "gatsby"
 import { navLinks, navLinkItem, navLinkText } from "./nav.module.scss"
-
-const menuLinks = [
-    {
-        name: "Home",
-        link: "/",
-        icon: "home",
-    },
-    {
-        name: "Thèmes",
-        link: "/themes",
-        icon: "category",
-    },
-    {
-        name: "Articles",
-        link: "/articles",
-        icon: "article",
-    },
-]
+import { LocalizedLink as Link } from "gatsby-theme-i18n"
+import { useTranslation } from "react-i18next"
 
 const Nav = () => {
-    return (
-        <nav>
-            <ul className={navLinks}>
-                {menuLinks.map(link => (
-                    <li className={navLinkItem}>
-                        <Link to={link.link} className={navLinkText}>
-                            <span>{link.icon}</span>
-                            {link.name}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </nav>
-    )
+  const { t } = useTranslation("index")
+
+  const menuLinks = [
+    {
+      name: "Home",
+      link: "/",
+      icon: "home",
+    },
+    {
+      name: t("themes"),
+      link: "/themes",
+      icon: "category",
+    },
+    {
+      name: "Articles",
+      link: "/articles",
+      icon: "article",
+    },
+  ]
+
+  return (
+    <nav>
+      <ul className={navLinks}>
+        {menuLinks.map(link => (
+          <li className={navLinkItem}>
+            <Link to={link.link} className={navLinkText}>
+              <span>{link.icon}</span>
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
 }
 
 export default Nav

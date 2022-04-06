@@ -1,10 +1,13 @@
-import * as React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import { container, heading } from './layout.module.scss'
-import Nav from './nav/nav.js'
+import * as React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import { container } from "./layout.module.scss"
+import { MdxLink } from "gatsby-theme-i18n"
+import Header from "./header"
+import { Helmet } from "react-helmet"
+import { MDXProvider } from "@mdx-js/react"
 
-const Layout = ({ pageTitle, children }) => {
-    const data = useStaticQuery(graphql`
+const Layout = ({ pageTitle, children, article, page }) => {
+  const data = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
@@ -14,17 +17,22 @@ const Layout = ({ pageTitle, children }) => {
     }
   `)
 
+  const components = {
+    a: MdxLink,
+  }
+
   return (
-    <div className={container}>
-      <title>{pageTitle? pageTitle + " - " + data.site.siteMetadata.title : data.site.siteMetadata.title}</title>
-      <span className={heading}>{data.site.siteMetadata.title}</span>
-      <Nav></Nav>
-      <main>
-        {children}
-      </main>
-    </div>
+    <React.Fragment>
+      <div className={container}>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{pageTitle ? pageTitle + " - " + data.site.siteMetadata.title : data.site.siteMetadata.title}</title>
+        </Helmet>
+        <Header article={article} page={page} site={data.site.siteMetadata.title} />
+        <MDXProvider components={components}>{children}</MDXProvider>
+      </div>
+    </React.Fragment>
   )
 }
-
 
 export default Layout
