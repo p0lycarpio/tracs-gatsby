@@ -2,8 +2,8 @@ import * as React from "react"
 import Layout from "../components/layout"
 import { useStaticQuery, graphql } from "gatsby"
 import { useLocalization } from "gatsby-theme-i18n"
-import { LocalizedLink } from "gatsby-theme-i18n"
 import { useTranslation } from "react-i18next"
+import ArticleItem from "../components/articleItem"
 
 const Articles = () => {
   const { locale } = useLocalization()
@@ -38,15 +38,8 @@ const Articles = () => {
     <main>
       <Layout pageTitle="Articles" page={"/articles"}>
         <h1>{t("articles_title")}</h1>
-
         {filtered.map(node => (
-          <article key={node.id}>
-            <h3>
-              <LocalizedLink to={node.frontmatter.slug}>{node.frontmatter.title}</LocalizedLink>
-            </h3>
-            <p>{node.frontmatter.author + ", " + node.frontmatter.date}</p>
-            <small>{node.excerpt}</small>
-          </article>
+          <ArticleItem article={node}></ArticleItem>
         ))}
       </Layout>
     </main>

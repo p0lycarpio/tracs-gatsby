@@ -1,10 +1,10 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { LocalizedLink, useLocalization } from "gatsby-theme-i18n"
+import { useLocalization } from "gatsby-theme-i18n"
+import ArticleItem from "./articleItem"
 
 export default function ArticleList() {
   const { locale } = useLocalization()
-  console.log(locale)
 
   const data = useStaticQuery(graphql`
     query {
@@ -31,13 +31,5 @@ export default function ArticleList() {
     return node.fields.locale.includes(locale)
   })
 
-  return filtered.slice(0, 5).map(node => (
-    <article key={node.id}>
-      <h3>
-        <LocalizedLink to={node.frontmatter.slug}>{node.frontmatter.title}</LocalizedLink>
-      </h3>
-      <p>{node.frontmatter.author + ", " + node.frontmatter.date}</p>
-      <small>{node.excerpt}</small>
-    </article>
-  ))
+  return filtered.slice(0, 5).map(node => <ArticleItem article={node}></ArticleItem>)
 }
