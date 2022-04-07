@@ -5,7 +5,9 @@ const ArticleItem = ({ article }) => {
   return (
     <div key={article.id}>
       <h3>
-        <LocalizedLink to={article.frontmatter.slug}>{article.frontmatter.title}</LocalizedLink>
+        <LocalizedLink to={article.frontmatter.slug} language={article.frontmatter.lang}>
+          {article.frontmatter.title}
+        </LocalizedLink>
       </h3>
       <p>{article.frontmatter.author + ", " + article.frontmatter.date}</p>
       <small>{article.excerpt}</small>{" "}

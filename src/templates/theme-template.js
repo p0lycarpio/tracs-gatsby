@@ -11,34 +11,48 @@ const ThemeTemplate = ({ data }) => {
   const { t } = useTranslation("index")
   const { locale } = useLocalization()
 
-  const [articles, setArticles] = React.useState("")
+  const [articles, setArticles] = React.useState([])
 
   React.useEffect(() => {
-    if (data.allMdx.nodes.length !== 0) {
-      // Build array of uniques articles
-      let uniqueArticles = []
-      /*       data.allMdx.nodes.forEach(article => {
-        // Find if an article is translated
-        let translated = data.allMdx.nodes.filter(
-          obj =>
-            obj.frontmatter.lang === "fr" ||
-            (article.frontmatter.slug !== obj.frontmatter.slug && obj.frontmatter.lang !== "fr")
-        )
-        console.log(translated)
-        translated.forEach((el, i) => {
-          if (uniqueArticles[i].slug.indexOf(el.frontmatter.slug) === -1) {
-            uniqueArticles.push(el)
+    const results = []
+    console.log(data)
+
+    data.allMdx.group.forEach(article_group => {
+      // One locale only
+      if (article_group.nodes.length === 1) {
+        results.push(article_group.nodes[0])
+      }
+      // Select user locale
+      else {
+        let selected_article = undefined
+        article_group.nodes.forEach(article => {
+          if (article.frontmatter.lang === locale) {
+            selected_article = article
           }
         })
-      }) */
+        // English fallback
+        if (selected_article === undefined) {
+          article_group.nodes.forEach(article => {
+            if (article.frontmatter.lang === "en") {
+              selected_article = article
+            }
+          })
+        }
+        // Arsène fallback
+        if (selected_article === undefined) {
+          selected_article = article_group.nodes[0]
+        }
+        // There is a result !
+        results.push(selected_article)
+      }
+    })
+    console.log(results)
+    setArticles(results)
+  }, [locale])
 
-      uniqueArticles = data.allMdx.nodes.filter(art => art.frontmatter.lang === useLocalization)
-
-      const listArt = uniqueArticles.map(article => <ArticleItem article={article}></ArticleItem>)
-
-      setArticles(listArt)
-    }
-  }, [data.allMdx.nodes])
+  const articles_list = articles.map(article => {
+    return <ArticleItem article={article} />
+  })
 
   if (data.mdx) {
     return (
@@ -51,7 +65,7 @@ const ThemeTemplate = ({ data }) => {
           />
           <MDXRenderer>{data.mdx.body}</MDXRenderer>
           <hr></hr>
-          {articles !== 0 ? articles : null}
+          {articles_list !== 0 ? articles_list : null}
         </Layout>
       </main>
     )
@@ -85,20 +99,22 @@ export const query = graphql`
       slug
     }
     allMdx(filter: { fileAbsolutePath: { regex: "/articles/" }, frontmatter: { theme_id: { eq: $theme_id } } }) {
-      nodes {
-        frontmatter {
-          date
-          title
+      group(field: frontmatter___slug) {
+        nodes {
+          frontmatter {
+            date
+            title
+            slug
+            author
+            lang
+          }
+          fields {
+            locale
+          }
+          id
           slug
-          author
-          lang
+          excerpt
         }
-        fields {
-          locale
-        }
-        id
-        slug
-        excerpt
       }
     }
   }
