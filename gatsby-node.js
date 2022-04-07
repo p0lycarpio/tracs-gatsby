@@ -21,6 +21,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             frontmatter {
               type
               slug
+              theme_id
             }
           }
         }
@@ -50,6 +51,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         component: themeTemplate,
         context: {
           slug: node.childMdx.frontmatter.slug,
+          theme_id: node.childMdx.frontmatter.theme_id,
         },
       })
     }
