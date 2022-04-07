@@ -39,7 +39,7 @@ const Articles = () => {
       <Layout pageTitle="Articles" page={"/articles"}>
         <h1>{t("articles_title")}</h1>
         {filtered.map(node => (
-          <ArticleItem article={node}></ArticleItem>
+          <ArticleItem article={node} key={node.id}></ArticleItem>
         ))}
       </Layout>
     </main>

@@ -3,7 +3,7 @@ import { LocalizedLink } from "gatsby-theme-i18n"
 
 const ArticleItem = ({ article }) => {
   return (
-    <div key={article.id}>
+    <div>
       <h3>
         <LocalizedLink to={article.frontmatter.slug} language={article.frontmatter.lang}>
           {article.frontmatter.title}

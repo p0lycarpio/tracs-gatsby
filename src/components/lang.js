@@ -38,8 +38,8 @@ export default function Lang({ slug, page }) {
     })
 
     return filtered.map(node => (
-      <span>
-        <Link key={node.node.id} to={"/" + node.node.childMdx.fields.locale + node.node.childMdx.frontmatter.slug}>
+      <span key={node.node.id}>
+        <Link to={"/" + node.node.childMdx.fields.locale + node.node.childMdx.frontmatter.slug}>
           {node.node.childMdx.fields.locale.toUpperCase()}
         </Link>
         {` `}

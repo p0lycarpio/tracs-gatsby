@@ -31,5 +31,5 @@ export default function ArticleList() {
     return node.fields.locale.includes(locale)
   })
 
-  return filtered.slice(0, 5).map(node => <ArticleItem article={node}></ArticleItem>)
+  return filtered.slice(0, 5).map(node => <ArticleItem article={node} key={node.id}></ArticleItem>)
 }

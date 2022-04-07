@@ -15,7 +15,6 @@ const ThemeTemplate = ({ data }) => {
 
   React.useEffect(() => {
     const results = []
-    console.log(data)
 
     data.allMdx.group.forEach(article_group => {
       // One locale only
@@ -38,7 +37,7 @@ const ThemeTemplate = ({ data }) => {
             }
           })
         }
-        // Arsène fallback
+        // Last fallback
         if (selected_article === undefined) {
           selected_article = article_group.nodes[0]
         }
@@ -46,12 +45,11 @@ const ThemeTemplate = ({ data }) => {
         results.push(selected_article)
       }
     })
-    console.log(results)
     setArticles(results)
-  }, [locale])
+  }, [data.allMdx.group, locale])
 
   const articles_list = articles.map(article => {
-    return <ArticleItem article={article} />
+    return <ArticleItem article={article} key={article.id} />
   })
 
   if (data.mdx) {

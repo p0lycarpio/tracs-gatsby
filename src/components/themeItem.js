@@ -8,7 +8,7 @@ const ThemeItem = ({ theme }) => {
   return (
     <div>
       <Link to={theme.slug}>
-        <GatsbyImage image={image} alt={theme.title} /> <h3>{theme.frontmatter.title}</h3>
+        <GatsbyImage image={image} alt={theme.frontmatter.title} /> <h3>{theme.frontmatter.title}</h3>
       </Link>
     </div>
   )
