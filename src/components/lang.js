@@ -2,6 +2,10 @@ import * as React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import { LocalizedLink, useLocalization } from "gatsby-theme-i18n"
 
+const lngStyles = {
+  marginRight: 8,
+}
+
 export default function Lang({ slug, page }) {
   const { config } = useLocalization()
 
@@ -38,7 +42,7 @@ export default function Lang({ slug, page }) {
     })
 
     return filtered.map(node => (
-      <span key={node.node.id}>
+      <span key={node.node.id} style={lngStyles}>
         <Link to={"/" + node.node.childMdx.fields.locale + node.node.childMdx.frontmatter.slug}>
           {node.node.childMdx.fields.locale.toUpperCase()}
         </Link>
@@ -50,11 +54,10 @@ export default function Lang({ slug, page }) {
       <div>
         {config.map(element => {
           return (
-            <span key={element.hrefLang}>
+            <span key={element.hrefLang} style={lngStyles}>
               <LocalizedLink to={page} language={element.code}>
                 {element.code.toUpperCase()}
               </LocalizedLink>
-              {` `}
             </span>
           )
         })}
