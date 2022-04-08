@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { useLocalization } from "gatsby-theme-i18n"
 import { useTranslation } from "react-i18next"
 import ArticleItem from "../components/articleItem"
+import { filterArticlesByLocale, sortArticles } from "../util/functions.js"
 
 const Articles = () => {
   const { locale } = useLocalization()
@@ -12,33 +13,35 @@ const Articles = () => {
   const data = useStaticQuery(graphql`
     query {
       allMdx(sort: { fields: frontmatter___title, order: ASC }, filter: { fileAbsolutePath: { regex: "/articles/" } }) {
-        nodes {
-          frontmatter {
-            date(formatString: "MMMM D, YYYY")
-            title
+        group(field: frontmatter___slug) {
+          nodes {
+            frontmatter {
+              date(formatString: "MMMM D, YYYY")
+              title
+              slug
+              author
+            }
+            fields {
+              locale
+            }
+            id
             slug
-            author
+            excerpt
           }
-          fields {
-            locale
-          }
-          id
-          slug
-          excerpt
         }
       }
     }
   `)
 
-  const filtered = data.allMdx.nodes.filter(node => {
-    return node.fields.locale.includes(locale)
-  })
+  const filtered = filterArticlesByLocale(data.allMdx.group, locale)
+  console.log(filtered)
+  const sorted = sortArticles(filtered, "abc")
 
   return (
     <main>
       <Layout pageTitle="Articles" page={"/articles"}>
         <h1>{t("articles_title")}</h1>
-        {filtered.map(node => (
+        {sorted.map(node => (
           <ArticleItem article={node} key={node.id}></ArticleItem>
         ))}
       </Layout>

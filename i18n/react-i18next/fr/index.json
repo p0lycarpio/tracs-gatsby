@@ -5,5 +5,8 @@
   "article404": "Article non trouvé",
   "article404msg": "L'article demandé dans cette langue n'a pas encore été traduit",
   "dispo": "Il est tout de même disponible en : ",
-  "articles_title": "Articles de A à Z"
+  "articles_title": "Articles de A à Z",
+  "page404": "Page non trouvée",
+  "page404msg": "Désolé nous n'avons pas trouvé ce que vous cherchiez.",
+  "go-home": "Retour à l'accueil"
 }

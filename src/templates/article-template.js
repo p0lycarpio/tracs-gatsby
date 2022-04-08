@@ -5,6 +5,14 @@ import { article } from "./article.module.scss"
 import { graphql } from "gatsby"
 import { useTranslation } from "react-i18next"
 
+const buttonStyle = {
+  all: "unset",
+  color: "darkslateblue",
+  textDecoration: "underline",
+  marginRight: 8,
+  cursor: "pointer",
+}
+
 const ArticleTemplate = ({ data }) => {
   const { t } = useTranslation("index")
   const [rendu, setRendu] = useState("")
@@ -42,10 +50,9 @@ const ArticleTemplate = ({ data }) => {
                 {t("dispo")}
                 {data.allMdx.nodes.map(article => (
                   <span key={article.id}>
-                    <button onClick={event => callArticle(article.fields.locale, event)}>
+                    <button onClick={event => callArticle(article.fields.locale, event)} style={buttonStyle}>
                       {article.fields.locale.toUpperCase()}
                     </button>
-                    {` `}
                   </span>
                 ))}
               </p>

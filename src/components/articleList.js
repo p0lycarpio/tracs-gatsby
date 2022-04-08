@@ -2,6 +2,7 @@ import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { useLocalization } from "gatsby-theme-i18n"
 import ArticleItem from "./articleItem"
+import { filterOnlyArticlesByLocale } from "../util/functions.js"
 
 export default function ArticleList() {
   const { locale } = useLocalization()
@@ -27,9 +28,7 @@ export default function ArticleList() {
     }
   `)
 
-  const filtered = data.allMdx.nodes.filter(node => {
-    return node.fields.locale.includes(locale)
-  })
+  const filtered = filterOnlyArticlesByLocale(data.allMdx.nodes, locale)
 
   return filtered.slice(0, 5).map(node => <ArticleItem article={node} key={node.id}></ArticleItem>)
 }
