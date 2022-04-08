@@ -40,6 +40,22 @@ module.exports = {
         locales: `./i18n/react-i18next`,
         i18nextOptions: {
           ns: ["index"],
+          defaultNS: ["index"],
+        },
+      },
+    },
+    {
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      options: {
+        // Fields to index
+        fields: [`title`, `excerpt`],
+        // How to resolve each field`s value for a supported node type
+        resolvers: {
+          Mdx: {
+            title: node => node.frontmatter.title,
+            slug: node => node.frontmatter.slug,
+            lang: node => node.frontmatter.lang,
+          },
         },
       },
     },
