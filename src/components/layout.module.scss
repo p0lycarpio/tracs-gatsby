@@ -4,16 +4,16 @@
   margin: auto;
   max-width: 1080px;
 }
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
   
 .heading {
   color: colors.$grey;
   text-transform: lowercase;
   font-weight: bolder;
   padding: 1em;
-  margin-bottom: 2em;
   background-color: colors.$lavender;
-}
-
-main {
-  margin: 1em 0;
 }
