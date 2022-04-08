@@ -5,5 +5,8 @@
   "article404": "Article not found",
   "article404msg": "The requested article in this locale is not yet translated",
   "dispo": "It is still available in: ",
-  "articles_title": "Articles from A to Z"
+  "articles_title": "Articles from A to Z",
+  "page404": "Page not found",
+  "page404msg": "Sorry we couldn't find what you were looking for.",
+  "go-home": "Go home"
 }

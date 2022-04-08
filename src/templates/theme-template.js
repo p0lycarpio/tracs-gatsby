@@ -6,6 +6,7 @@ import { graphql } from "gatsby"
 import { useTranslation } from "react-i18next"
 import { useLocalization } from "gatsby-theme-i18n"
 import ArticleItem from "../components/articleItem"
+import { filterArticlesByLocale, sortArticles } from "../util/functions"
 
 const ThemeTemplate = ({ data }) => {
   const { t } = useTranslation("index")
@@ -14,37 +15,8 @@ const ThemeTemplate = ({ data }) => {
   const [articles, setArticles] = React.useState([])
 
   React.useEffect(() => {
-    const results = []
-
-    data.allMdx.group.forEach(article_group => {
-      // One locale only
-      if (article_group.nodes.length === 1) {
-        results.push(article_group.nodes[0])
-      }
-      // Select user locale
-      else {
-        let selected_article = undefined
-        article_group.nodes.forEach(article => {
-          if (article.frontmatter.lang === locale) {
-            selected_article = article
-          }
-        })
-        // English fallback
-        if (selected_article === undefined) {
-          article_group.nodes.forEach(article => {
-            if (article.frontmatter.lang === "en") {
-              selected_article = article
-            }
-          })
-        }
-        // Last fallback
-        if (selected_article === undefined) {
-          selected_article = article_group.nodes[0]
-        }
-        // There is a result !
-        results.push(selected_article)
-      }
-    })
+    const articlesTheme = filterArticlesByLocale(data.allMdx.group, locale)
+    const results = sortArticles(articlesTheme, "date")
     setArticles(results)
   }, [data.allMdx.group, locale])
 
