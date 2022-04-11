@@ -46,7 +46,6 @@ export default function Lang({ slug, page }) {
         <Link to={"/" + node.node.childMdx.fields.locale + node.node.childMdx.frontmatter.slug}>
           {node.node.childMdx.fields.locale.toUpperCase()}
         </Link>
-        {` `}
       </span>
     ))
   } else if (page) {
