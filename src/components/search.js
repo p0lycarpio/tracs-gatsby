@@ -2,6 +2,12 @@ import React, { Component } from "react"
 import { Index } from "elasticlunr"
 import { LocalizedLink } from "gatsby-theme-i18n"
 
+const resultsStyle = {
+  position: "absolute",
+  listStyle: "none",
+  padding: 4,
+}
+
 // Search component
 export default class Search extends Component {
   constructor(props) {
@@ -14,14 +20,16 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ marginTop: 16 }}>
         <input type="text" value={this.state.query} onChange={this.search} />
-        <ul>
+        <ul style={resultsStyle}>
           {this.state.results.map(page => (
             <li key={page.id}>
               <LocalizedLink to={page.slug} language={page.lang}>
-                {page.title + " (" + page.lang + ")"}
+                {page.title}
               </LocalizedLink>
+              <span>{page.lang ? " (" + page.lang + ") " : ""}</span>
+              <small>{page.author ? page.author : ""}</small>
             </li>
           ))}
         </ul>

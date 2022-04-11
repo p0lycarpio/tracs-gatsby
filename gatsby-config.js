@@ -48,11 +48,12 @@ module.exports = {
       resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
       options: {
         // Fields to index
-        fields: [`title`, `excerpt`],
+        fields: [`title`, `excerpt`, `author`],
         // How to resolve each field`s value for a supported node type
         resolvers: {
           Mdx: {
             title: node => node.frontmatter.title,
+            author: node => node.frontmatter.author,
             slug: node => node.frontmatter.slug,
             lang: node => node.frontmatter.lang,
           },
