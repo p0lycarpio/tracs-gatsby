@@ -44,7 +44,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         context: {
           slug: node.childMdx.frontmatter.slug,
         },
-        defer: true,
       })
     } else if (node.sourceInstanceName === "themes" && node.childMdx != null) {
       createPage({
@@ -54,7 +53,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           slug: node.childMdx.frontmatter.slug,
           theme_id: node.childMdx.frontmatter.theme_id,
         },
-        defer: true,
       })
     }
   })
