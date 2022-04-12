@@ -39,4 +39,5 @@ collections:
           i18n: true,
         }
       - { label: "Slug", name: "slug", widget: "string", hint: "/articles/...", required: true }
+      - { label: "Brouillon", name: "draft", widget: "boolean", default: "true", i18n: true }
       - { label: "Corps", name: "body", widget: "markdown", i18n: true }

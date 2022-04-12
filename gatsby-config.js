@@ -63,7 +63,9 @@ module.exports = {
         engine: "flexsearch",
         query: `
           {
-            allMdx(filter: { fileAbsolutePath: { regex: "/articles/" }}) {
+            allMdx(
+              filter: {fileAbsolutePath: {regex: "/articles/"}, frontmatter: {draft: {ne: true}}}
+            ) {
               nodes {
                 id
                 frontmatter {
