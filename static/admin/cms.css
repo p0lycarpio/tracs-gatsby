@@ -8,3 +8,20 @@ body {
 body {
   padding: 20px;
 }
+
+h1 {
+  margin-top: 20px;
+  color: #666;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+  line-height: 32px;
+}

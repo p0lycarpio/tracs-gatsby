@@ -12,7 +12,12 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-netlify`,
-    `gatsby-plugin-netlify-cms`,
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        modulePath: `${__dirname}/static/admin/netlify.js`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

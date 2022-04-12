@@ -25,7 +25,7 @@ const ArticleTemplate = ({ data }) => {
     setRendu(translated[0])
   }
 
-  if (data.mdx) {
+  if (data.mdx.body) {
     return (
       <main>
         <Layout article={data.mdx.slug} pageTitle={data.mdx.frontmatter.title}>

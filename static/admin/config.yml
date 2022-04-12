@@ -2,21 +2,41 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "content/{{fields.slug}}"
+local_backend: true
+
+i18n:
+  structure: multiple_files
+  locales: [en, fr, pt, es]
+
+media_folder: "static/images/uploads"
 
 collections:
   - name: "articles"
     label: "Articles"
     folder: "content/articles"
+    summary: "{{fields.title}} ({{fields.lang}}) - {{fields.author}}"
     create: true
+    i18n: true
     identifier_field: slug
-    slug: "{{fields.lang}}/{{fields.slug}}"
+    media_folder: "assets"
     path: "{{title}}/index"
+    slug: "index"
+    extension: "md"
+    format: "frontmatter"
+    preview_path: "{{fields.lang}}/{{fields.slug}}"
     fields:
-      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Titre", name: "title", widget: "string", required: true, i18n: true }
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Auteur", name: "author", widget: "string" }
       - { label: "Thème", name: "theme_id", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Langue", name: "lang", widget: "string" }
-      - { label: "Corps", name: "body", widget: "markdown" }
+      - { label: "Type", name: "type", widget: "hidden", default: "articles" }
+      - {
+          label: "Langue",
+          name: "lang",
+          widget: "select",
+          required: true,
+          options: ["fr", "en", "pt", "es"],
+          i18n: true,
+        }
+      - { label: "Slug", name: "slug", widget: "string", hint: "/articles/...", required: true }
+      - { label: "Corps", name: "body", widget: "markdown", i18n: true }
