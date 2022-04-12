@@ -6,6 +6,7 @@ theme_id: "cinema"
 type: "articles"
 lang: "en"
 slug: "/articles/gilberto-gil/"
+draft: false
 ---
 
 ["I knew that music would be my language and that I would discover the
@@ -65,7 +66,7 @@ of Stockhausen’s students.
 <div class="tracs-resource left" data-id="17"></div>
 
 _Tropicália_ claimed the heritage of both Brazilian modernism and of the
-_Anthropophagic Manifesto_ written by poet Oswald de Andrade. Published
+_Anthropophagic Manifesto_ written by poet Oswald de Andrade. draft
 in 1928, the text opened with a provocative interrogation: "Tupi or not
 Tupi? That is the question." For in the image of Tupinamba Indians who
 devoured their enemies to absorb their vital energy, Brazilian artists

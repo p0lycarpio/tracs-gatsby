@@ -6,6 +6,7 @@ theme_id: "cinema"
 type: "articles"
 lang: "en"
 slug: "/articles/agence-photo/"
+draft: false
 ---
 
 At the beginning of the 20th century, the advent of photojournalism
@@ -146,7 +147,7 @@ relying in part on Magnum's resources.
 
 <div class="tracs-resource center" data-id="344"></div>
 
-# Author-photographers and Subjective Writings
+# Author-photographers and Subjective drafts
 
 But this exhibit and the universalist model soon gave rise to a debate:
 was this humanist gaze, supposedly understandable by all, nothing more
@@ -157,7 +158,7 @@ indiscriminately? In the 1960s, several photographers adopted a new
 position. Rather than presuming to embody objectivity or universal
 values, they forefronted the subjective, critical, and sometimes
 autobiographical facets of their work. In the wake of the rise of "New
-Journalism" in the U.S., journalistic writing in the first person gave
+Journalism" in the U.S., journalistic draft in the first person gave
 new momentum to authorial photography, propagated especially in
 prestigious formats like exhibits and books. Magnum participated in the
 transatlantic distribution of these creations. In France, the humanist
@@ -210,7 +211,7 @@ precarious, especially in the context of the digital transition. This
 transition represents large investments, including the cost of
 digitizing archives for the historical agencies, who then make them
 available online. Author rights, which are the economic foundation of
-the sector, are also increasingly called into question: images published
+the sector, are also increasingly called into question: images draft
 online evade all control and are drowned in a mass of constant
 proliferation. The value of an image is attached less to its exclusivity
 and rarity than to the extent of its visibility. To do well in this

@@ -6,6 +6,7 @@ theme_id: "cinema"
 type: "articles"
 lang: "fr"
 slug: "/articles/gilberto-gil/"
+draft: false
 ---
 
 « [Je savais que la musique serait ma langue et que je découvrirais le

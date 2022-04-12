@@ -6,6 +6,7 @@ theme_id: "cinema"
 type: "articles"
 lang: "fr"
 slug: "/articles/agence-photo/"
+draft: false
 ---
 
 Les agences photographiques se développent en Europe et aux États-Unis

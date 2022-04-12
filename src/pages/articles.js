@@ -20,9 +20,8 @@ const Articles = () => {
               title
               slug
               author
-            }
-            fields {
-              locale
+              draft
+              lang
             }
             id
             slug

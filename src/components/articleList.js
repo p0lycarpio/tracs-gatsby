@@ -16,6 +16,7 @@ export default function ArticleList() {
             title
             slug
             author
+            draft
           }
           fields {
             locale

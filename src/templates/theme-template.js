@@ -77,6 +77,7 @@ export const query = graphql`
             slug
             author
             lang
+            draft
           }
           fields {
             locale

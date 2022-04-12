@@ -1,15 +1,15 @@
 /**
- * Renvoie dans le même ordre les articles qui sont **uniquement** dans la langue désirée
+ * Renvoie dans le même ordre les articles qui sont **uniquement** dans la langue désirée et pas un brouillon.
  * @param {Object} articlesList Liste d'articles de toutes langues
  * @param {String} locale Langue souhaitée. Code à 2 lettres ex: "fr"
  * @returns {Array} Tableau d'objets de tous les articles
  */
 export function filterOnlyArticlesByLocale(articlesList, locale) {
-  return articlesList.filter(node => node.fields.locale.includes(locale))
+  return articlesList.filter(node => node.fields.locale.includes(locale) && !node.frontmatter.draft)
 }
 
 /**
- * Obtenir une liste d'article dans la langue désirée. Sinon, renvoie l'article dans la langue disponible.
+ * Obtenir une liste d'article dans la langue désirée. Sinon, renvoie l'article dans la langue disponible. Ne renvoie pas les articles avec "draft" = true
  * @param  {Object} articlesGroupedList Retour de la query GraphQL **grouppée**
  * @param  {String} currentLocale Langue souhaitée. Code à 2 lettres ex: "fr"
  * @return {Array} Tableau d'objets de tous les articles
@@ -26,14 +26,14 @@ export function filterArticlesByLocale(articlesGroupedList, currentLocale) {
     else {
       let selected_article = undefined
       article_group.nodes.forEach(article => {
-        if (article.frontmatter.lang === currentLocale) {
+        if (article.frontmatter.lang === currentLocale && !article.frontmatter.draft) {
           selected_article = article
         }
       })
       // English fallback
       if (selected_article === undefined) {
         article_group.nodes.forEach(article => {
-          if (article.frontmatter.lang === "en") {
+          if (article.frontmatter.lang === "en" && !article.frontmatter.draft) {
             selected_article = article
           }
         })

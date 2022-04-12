@@ -25,7 +25,7 @@ const ArticleTemplate = ({ data }) => {
     setRendu(translated[0])
   }
 
-  if (data.mdx.body) {
+  if (data.mdx && data.mdx.frontmatter.draft !== true) {
     return (
       <main>
         <Layout article={data.mdx.slug} pageTitle={data.mdx.frontmatter.title}>
@@ -48,13 +48,15 @@ const ArticleTemplate = ({ data }) => {
               <p>{t("article404msg")}</p>
               <p>
                 {t("dispo")}
-                {data.allMdx.nodes.map(article => (
-                  <span key={article.id}>
-                    <button onClick={event => callArticle(article.fields.locale, event)} style={buttonStyle}>
-                      {article.fields.locale.toUpperCase()}
-                    </button>
-                  </span>
-                ))}
+                {data.allMdx.nodes
+                  .filter(article => !article.frontmatter.draft)
+                  .map(article => (
+                    <span key={article.id}>
+                      <button onClick={event => callArticle(article.fields.locale, event)} style={buttonStyle}>
+                        {article.fields.locale.toUpperCase()}
+                      </button>
+                    </span>
+                  ))}
               </p>
             </div>
           </Layout>
@@ -81,6 +83,7 @@ export const query = graphql`
       frontmatter {
         slug
         title
+        draft
       }
       body
       slug
@@ -92,6 +95,7 @@ export const query = graphql`
         }
         frontmatter {
           title
+          draft
         }
         body
       }
