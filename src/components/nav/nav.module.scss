@@ -1,4 +1,4 @@
-@use '../../scss/colors';
+@use "../../scss/colors";
 
 .nav-links {
   display: flex;
@@ -11,17 +11,17 @@
 }
 
 .nav-link-text {
-  color: colors.$grey!important;
+  color: colors.$grey !important;
   text-decoration: none;
   font-weight: 500;
 
   span {
-    font-family: 'Material Icons';
+    font-family: "Material Icons";
     font-size: 24px;
     color: colors.$lightgrey;
     margin-right: 6px;
     vertical-align: bottom;
-    line-height:24px;
+    line-height: 24px;
   }
 }
 
