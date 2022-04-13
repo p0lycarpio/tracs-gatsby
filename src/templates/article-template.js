@@ -84,6 +84,8 @@ export const query = graphql`
         slug
         title
         draft
+        date
+        author
       }
       body
       slug

@@ -43,6 +43,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         component: articleTemplate,
         context: {
           slug: node.childMdx.frontmatter.slug,
+          locale: node.childMdx.frontmatter.locale
         },
       })
     } else if (node.sourceInstanceName === "themes" && node.childMdx != null) {
